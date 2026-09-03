@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aktivace na Bosenských pyramidách – přihláška | Oáza Adamanthea</title>
+  <meta name="description" content="Přihláška na duchovní zájezd k Bosenským pyramidám ve Visoku. Termín 24.–29. září 2026.">
+
+  <!-- Fonty: Cinzel (nadpisy) + Cormorant Garamond (úvod) + Open Sans (formulář) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- QR knihovna pro generování QR kódu na klientovi -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+  <style>
+    /* ════════════════════════════════════════════════════════
+       Reset a proměnné
+    ════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Barvy — světlá paleta inspirovaná pískovcem a zlatem pyramid */
+      --bg:                 #faf6ec;
+      --bg-secondary:       #f3ecd9;
+      --karta-bg:           #ffffff;
+      --karta-bg-hover:     #fdfaf0;
+      --zlata:              #b8923f;
+      --zlata-tmava:        #8a6820;
+      --zlata-svetla:       #d4b878;
+      --zlata-velmi-svetla: #f0e2bd;
+      --text:               #3a2e1a;
+      --text-tlumeny:       #7a6a4a;
+      --text-jemny:         #a99878;
+      --okraj:              rgba(184, 146, 63, 0.25);
+      --okraj-svetly:       rgba(184, 146, 63, 0.12);
+      --okraj-vyrazny:      rgba(184, 146, 63, 0.55);
+      --input-bg:           #fffcf5;
+      --input-focus-bg:     #fff8e6;
+      --chyba:              #c0494e;
+      --chyba-bg:           #fbe8e8;
+      --uspech:             #5a8a3a;
+      --radius-karta:       14px;
+      --radius-input:       8px;
+      --stin-jemny:         0 2px 12px rgba(138, 104, 32, 0.06);
+      --stin-vyrazny:       0 12px 40px rgba(138, 104, 32, 0.18);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Tělo
+    ════════════════════════════════════════════════════════ */
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      background-image:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212, 184, 120, 0.18) 0%, transparent 100%),
+        radial-gradient(ellipse 50% 30% at 50% 100%, rgba(212, 184, 120, 0.12) 0%, transparent 100%);
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Hero banner s fotkou pyramidy
+    ════════════════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 70vh;
+      min-height: 480px;
+      max-height: 720px;
+      overflow: hidden;
+      background: #2a3a4a; /* záložní barva */
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+
+    /* Jemný gradient pro čitelnost textu */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, transparent 30%, transparent 60%, rgba(0,0,0,0.55) 100%),
+        linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 50%, rgba(0,0,0,0.15) 100%);
+      pointer-events: none;
+    }
+
+    .hero-obsah {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 60px 30px 50px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .hero-ornament {
+      display: block;
+      font-size: 13px;
+      letter-spacing: 8px;
+      color: var(--zlata-svetla);
+      margin-bottom: 16px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    .hero-nadpis {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(24px, 4.8vw, 48px);
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 4px;
+      line-height: 1.2;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 0 60px rgba(184, 146, 63, 0.4);
+      margin-bottom: 14px;
+    }
+
+    .hero-podtitul {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2.6vw, 24px);
+      color: var(--zlata-velmi-svetla);
+      font-weight: 500;
+      letter-spacing: 4px;
+      font-style: italic;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.6);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Úvodní text pod hero
+    ════════════════════════════════════════════════════════ */
+    .uvod {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 30px 30px;
+      text-align: center;
+    }
+
+    .uvod-popis {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2.4vw, 22px);
+      line-height: 1.65;
+      color: var(--text);
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .deliaci-cara {
+      width: 140px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--zlata), transparent);
+      margin: 30px auto;
+    }
+
+    .deliaci-cara::before {
+      content: '✦';
+      display: block;
+      text-align: center;
+      color: var(--zlata);
+      font-size: 14px;
+      transform: translateY(-9px);
+      background: var(--bg);
+      width: 24px;
+      margin: 0 auto;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Hlavní obsah
+    ════════════════════════════════════════════════════════ */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Karty/sekce formuláře
+    ════════════════════════════════════════════════════════ */
+    .sekce {
+      background: var(--karta-bg);
+      border: 1px solid var(--okraj);
+      border-radius: var(--radius-karta);
+      padding: 32px 30px;
+      margin-bottom: 22px;
+      box-shadow: var(--stin-jemny);
+    }
+
+    .sekce-nadpis {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--zlata-tmava);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 26px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .sekce-nadpis::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--okraj-svetly);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Pole formuláře
+    ════════════════════════════════════════════════════════ */
+    .pole { margin-bottom: 18px; }
+    .pole:last-child { margin-bottom: 0; }
+
+    .pole-skupina {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-tlumeny);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    label .povinne {
+      color: var(--zlata);
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--okraj);
+      border-radius: var(--radius-input);
+      color: var(--text);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 12px 14px;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23b8923f' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    select option {
+      background: #fff;
+      color: var(--text);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--zlata);
+      background: var(--input-focus-bg);
+      box-shadow: 0 0 0 3px rgba(184, 146, 63, 0.12);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--text-jemny);
+      font-style: italic;
+    }
+
+    input.chyba-pole, textarea.chyba-pole, select.chyba-pole {
+      border-color: var(--chyba);
+      background: var(--chyba-bg);
+    }
+
+    .zprava-chyby {
+      font-size: 12px;
+      color: var(--chyba);
+      margin-top: 5px;
+      display: none;
+    }
+
+    .zprava-chyby.viditelna { display: block; }
+
+    /* ════════════════════════════════════════════════════════
+       Radio tlačítka (cena + měna + typ platby)
+    ════════════════════════════════════════════════════════ */
+    .radio-skupina {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .radio-volba {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--input-bg);
+      border: 1px solid var(--okraj);
+      border-radius: var(--radius-input);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.1s;
+    }
+
+    .radio-volba:hover {
+      border-color: var(--okraj-vyrazny);
+      background: var(--input-focus-bg);
+    }
+
+    .radio-volba input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      accent-color: var(--zlata);
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .radio-volba.vybrana {
+      border-color: var(--zlata);
+      background: var(--zlata-velmi-svetla);
+      box-shadow: 0 0 0 1px var(--zlata);
+    }
+
+    .radio-volba-text { flex: 1; }
+
+    .radio-volba-nazev {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      display: block;
+    }
+
+    .radio-volba-popis {
+      font-size: 12.5px;
+      color: var(--text-tlumeny);
+      margin-top: 3px;
+    }
+
+    .radio-volba-cena {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      color: var(--zlata-tmava);
+      font-weight: 600;
+      flex-shrink: 0;
+      align-self: center;
+      text-align: right;
+      line-height: 1.3;
+    }
+
+    .radio-volba-cena small {
+      display: block;
+      font-size: 12px;
+      color: var(--text-tlumeny);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Měna — segmentovaný přepínač
+    ════════════════════════════════════════════════════════ */
+    .mena-prepinac {
+      display: flex;
+      gap: 0;
+      background: var(--input-bg);
+      border: 1px solid var(--okraj);
+      border-radius: var(--radius-input);
+      padding: 4px;
+    }
+
+    .mena-prepinac label {
+      flex: 1;
+      margin: 0;
+      padding: 10px 16px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 6px;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--text-tlumeny);
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .mena-prepinac input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .mena-prepinac input[type="radio"]:checked + label {
+      background: var(--zlata);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(184, 146, 63, 0.3);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Checkbox (focení aury, sdílení pokoje, GDPR)
+    ════════════════════════════════════════════════════════ */
+    .checkbox-volba {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--input-bg);
+      border: 1px solid var(--okraj);
+      border-radius: var(--radius-input);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+
+    .checkbox-volba:hover {
+      border-color: var(--okraj-vyrazny);
+      background: var(--input-focus-bg);
+    }
+
+    .checkbox-volba input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      accent-color: var(--zlata);
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .checkbox-volba.vybrana {
+      border-color: var(--zlata);
+      background: var(--zlata-velmi-svetla);
+    }
+
+    .checkbox-volba-text { flex: 1; }
+
+    .checkbox-volba-nazev {
+      font-size: 14px;
+      color: var(--text);
+      display: block;
+    }
+
+    .checkbox-volba-popis {
+      font-size: 12px;
+      color: var(--text-tlumeny);
+      margin-top: 3px;
+    }
+
+    .checkbox-volba-cena {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      color: var(--zlata-tmava);
+      font-weight: 600;
+      align-self: center;
+      flex-shrink: 0;
+    }
+
+    .checkbox-volba a {
+      color: var(--zlata-tmava);
+      text-decoration: underline;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Shrnutí ceny
+    ════════════════════════════════════════════════════════ */
+    .cena-shrnuti {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 24px;
+      background: linear-gradient(135deg, var(--zlata-velmi-svetla), #fff8e6);
+      border: 1px solid var(--zlata);
+      border-radius: var(--radius-input);
+      margin-top: 20px;
+    }
+
+    .cena-popisek {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--zlata-tmava);
+      text-transform: uppercase;
+    }
+
+    .cena-popisek small {
+      display: block;
+      font-size: 11px;
+      color: var(--text-tlumeny);
+      letter-spacing: 1px;
+      margin-top: 4px;
+      text-transform: none;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+    }
+
+    .cena-hodnota {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--zlata-tmava);
+    }
+
+    .cena-hodnota sup {
+      font-size: 14px;
+      vertical-align: super;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Tlačítko odeslat
+    ════════════════════════════════════════════════════════ */
+    .tlacitko-odeslat {
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(135deg, var(--zlata) 0%, var(--zlata-tmava) 100%);
+      border: none;
+      border-radius: var(--radius-input);
+      color: #fff;
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+      margin-top: 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(184, 146, 63, 0.3);
+    }
+
+    .tlacitko-odeslat:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(184, 146, 63, 0.4);
+    }
+
+    .tlacitko-odeslat:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .spinner-tlacitko {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2.5px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: toceni 0.7s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes toceni { to { transform: rotate(360deg); } }
+
+    .tlacitko-odeslat.nacitani .text-tlacitka { display: none; }
+    .tlacitko-odeslat.nacitani .spinner-tlacitko { display: block; }
+
+    /* ════════════════════════════════════════════════════════
+       Globální chyba
+    ════════════════════════════════════════════════════════ */
+    .globalni-chyba {
+      display: none;
+      padding: 16px 18px;
+      background: var(--chyba-bg);
+      border: 1px solid var(--chyba);
+      border-radius: var(--radius-input);
+      color: var(--chyba);
+      font-size: 13px;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    .globalni-chyba.viditelna { display: block; }
+
+    .poznamka {
+      text-align: center;
+      color: var(--text-tlumeny);
+      font-size: 12.5px;
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Zápatí
+    ════════════════════════════════════════════════════════ */
+    footer {
+      text-align: center;
+      padding: 30px 20px 40px;
+      color: var(--text-jemny);
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      border-top: 1px solid var(--okraj-svetly);
+    }
+
+    footer a {
+      color: var(--text-tlumeny);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--zlata-tmava); }
+
+    /* ════════════════════════════════════════════════════════
+       Obrazovka úspěchu (QR kód po odeslání)
+    ════════════════════════════════════════════════════════ */
+    .uspech-obrazovka {
+      display: none;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .uspech-obrazovka.viditelna { display: block; }
+
+    .uspech-karta {
+      background: var(--karta-bg);
+      border: 1px solid var(--zlata);
+      border-radius: var(--radius-karta);
+      padding: 40px 36px;
+      box-shadow: var(--stin-vyrazny);
+      text-align: center;
+    }
+
+    .uspech-ikona {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, var(--zlata) 0%, var(--zlata-tmava) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 32px;
+    }
+
+    .uspech-nadpis {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      color: var(--zlata-tmava);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .uspech-podtitul {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: var(--text-tlumeny);
+      font-style: italic;
+      margin-bottom: 32px;
+    }
+
+    .qr-platba {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-input);
+      padding: 28px 24px;
+      margin: 24px 0;
+    }
+
+    .qr-platba h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      color: var(--zlata-tmava);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .qr-canvas-wrapper {
+      display: inline-block;
+      background: #fff;
+      padding: 16px;
+      border-radius: var(--radius-input);
+      border: 1px solid var(--okraj);
+      margin-bottom: 20px;
+    }
+
+    #qr-canvas {
+      display: block;
+    }
+
+    .platba-castka {
+      font-family: 'Cinzel', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--zlata-tmava);
+      margin-bottom: 6px;
+    }
+
+    .platba-poznamka {
+      font-size: 13px;
+      color: var(--text-tlumeny);
+      margin-bottom: 24px;
+    }
+
+    .platba-detaily {
+      text-align: left;
+      background: #fff;
+      border: 1px solid var(--okraj);
+      border-radius: var(--radius-input);
+      padding: 20px 22px;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .platba-radek {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--okraj-svetly);
+      font-size: 14px;
+    }
+
+    .platba-radek:last-child { border-bottom: none; }
+
+    .platba-radek-popis {
+      color: var(--text-tlumeny);
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .platba-radek-hodnota {
+      color: var(--text);
+      font-weight: 600;
+      text-align: right;
+      word-break: break-all;
+    }
+
+    .uspech-poznamka {
+      font-size: 13.5px;
+      color: var(--text-tlumeny);
+      line-height: 1.7;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--okraj-svetly);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       Responzivita
+    ════════════════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      .hero { height: 60vh; min-height: 380px; }
+      .hero-obsah { padding: 40px 20px 30px; }
+      .hero-ornament { letter-spacing: 6px; margin-bottom: 12px; }
+      .hero-nadpis { letter-spacing: 2px; }
+      .hero-podtitul { letter-spacing: 2.5px; }
+
+      .uvod { padding: 40px 20px 20px; }
+
+      .sekce { padding: 24px 20px; }
+      .pole-skupina { grid-template-columns: 1fr; }
+
+      .uspech-karta { padding: 30px 22px; }
+      .platba-castka { font-size: 28px; }
+      .radio-volba-cena { font-size: 14px; }
+
+      .platba-radek {
+        flex-direction: column;
+        gap: 2px;
+      }
+      .platba-radek-hodnota { text-align: left; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       Hero banner
+  ═══════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <picture>
+      <source media="(max-width: 600px)" srcset="/pyramida-mobile.jpg">
+      <img src="/pyramida.jpg" alt="Bosenská pyramida Slunce ve Visoku" class="hero-img" loading="eager" fetchpriority="high">
+    </picture>
+    <div class="hero-obsah">
+      <span class="hero-ornament">✦ &nbsp;·&nbsp; ✦ &nbsp;·&nbsp; ✦</span>
+      <h1 class="hero-nadpis">Aktivace na Bosenských pyramidách</h1>
+      <p class="hero-podtitul">24. – 29. září 2026</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       Úvodní text
+  ═══════════════════════════════════════════════════════ -->
+  <section class="uvod">
+    <p class="uvod-popis">
+      Zájezd k nejstarším pyramidám světa ve Visoku, Bosna a&nbsp;Hercegovina.
+      Místo energie, světla a&nbsp;transformace.
+    </p>
+    <div class="deliaci-cara"></div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       Formulář přihlášky
+  ═══════════════════════════════════════════════════════ -->
+  <main id="hlavni-obsah">
+    <form id="prihlaska-form" novalidate>
+
+      <!-- ──────────────────────────────────────────────────
+           Sekce 1: Osobní údaje
+      ────────────────────────────────────────────────── -->
+      <div class="sekce">
+        <h2 class="sekce-nadpis">Osobní údaje</h2>
+
+        <div class="pole">
+          <label for="jmeno">Jméno a příjmení <span class="povinne">*</span></label>
+          <input type="text" id="jmeno" name="jmeno" placeholder="Jan Novák" autocomplete="name" required>
+          <span class="zprava-chyby" id="chyba-jmeno">Zadejte prosím Vaše jméno a příjmení.</span>
+        </div>
+
+        <div class="pole-skupina">
+          <div class="pole">
+            <label for="datum_narozeni">Datum narození <span class="povinne">*</span></label>
+            <input type="date" id="datum_narozeni" name="datum_narozeni" required autocomplete="bday">
+            <span class="zprava-chyby" id="chyba-datum_narozeni">Zadejte datum narození.</span>
+          </div>
+          <div class="pole">
+            <label for="narodnost">Národnost <span class="povinne">*</span></label>
+            <input type="text" id="narodnost" name="narodnost" placeholder="česká" required>
+            <span class="zprava-chyby" id="chyba-narodnost">Zadejte národnost.</span>
+          </div>
+        </div>
+
+        <div class="pole">
+          <label for="cislo_dokladu">Číslo pasu nebo občanského průkazu <span class="povinne">*</span></label>
+          <input type="text" id="cislo_dokladu" name="cislo_dokladu" placeholder="AB123456" required autocomplete="off">
+          <span class="zprava-chyby" id="chyba-cislo_dokladu">Zadejte číslo dokladu totožnosti.</span>
+        </div>
+
+        <div class="pole">
+          <label for="adresa">Kontaktní adresa <span class="povinne">*</span></label>
+          <textarea id="adresa" name="adresa" rows="2" placeholder="Ulice 123, 760 01 Zlín" required autocomplete="street-address"></textarea>
+          <span class="zprava-chyby" id="chyba-adresa">Zadejte kontaktní adresu.</span>
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────
+           Sekce 2: Kontakt
+      ────────────────────────────────────────────────── -->
+      <div class="sekce">
+        <h2 class="sekce-nadpis">Kontakt</h2>
+
+        <div class="pole-skupina">
+          <div class="pole">
+            <label for="email">E-mail <span class="povinne">*</span></label>
+            <input type="email" id="email" name="email" placeholder="jan@email.cz" required autocomplete="email">
+            <span class="zprava-chyby" id="chyba-email">Zadejte platnou e-mailovou adresu.</span>
+          </div>
+          <div class="pole">
+            <label for="telefon">Telefon <span class="povinne">*</span></label>
+            <input type="tel" id="telefon" name="telefon" placeholder="+420 777 123 456" required autocomplete="tel">
+            <span class="zprava-chyby" id="chyba-telefon">Zadejte telefonní číslo.</span>
+          </div>
+        </div>
+
+        <div class="pole">
+          <label for="jak_se_dozvedeli">Jak jste se o zájezdu dozvěděli?</label>
+          <input type="text" id="jak_se_dozvedeli" name="jak_se_dozvedeli" placeholder="Facebook, od přítele/kyně, web, …">
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────
+           Sekce 3: Podrobnosti zájezdu
+      ────────────────────────────────────────────────── -->
+      <div class="sekce">
+        <h2 class="sekce-nadpis">Podrobnosti zájezdu</h2>
+
+        <div class="pole-skupina">
+          <div class="pole">
+            <label for="nastupni_misto">Nástupní místo <span class="povinne">*</span></label>
+            <select id="nastupni_misto" name="nastupni_misto" required>
+              <option value="" disabled selected>— vyberte —</option>
+              <option value="Kroměříž">Kroměříž</option>
+              <option value="Brno">Brno</option>
+              <option value="Bratislava">Bratislava</option>
+            </select>
+            <span class="zprava-chyby" id="chyba-nastupni_misto">Vyberte nástupní místo.</span>
+          </div>
+          <div class="pole">
+            <label for="strava">Strava <span class="povinne">*</span></label>
+            <select id="strava" name="strava" required>
+              <option value="" disabled selected>— vyberte —</option>
+              <option value="Normální">Normální</option>
+              <option value="Vegetariánská">Vegetariánská</option>
+            </select>
+            <span class="zprava-chyby" id="chyba-strava">Vyberte typ stravy.</span>
+          </div>
+        </div>
+
+        <div class="pole">
+          <label for="ubytovani">Ubytování <span class="povinne">*</span></label>
+          <select id="ubytovani" name="ubytovani" required>
+            <option value="" disabled selected>— vyberte typ pokoje —</option>
+            <option value="Dvoulůžkový">Dvoulůžkový pokoj</option>
+            <option value="Třílůžkový">Třílůžkový pokoj</option>
+            <option value="Čtyřlůžkový">Čtyřlůžkový pokoj</option>
+          </select>
+          <span class="zprava-chyby" id="chyba-ubytovani">Vyberte typ ubytování.</span>
+        </div>
+
+        <div class="pole">
+          <label for="spolubydlici">Jména spolubydlících</label>
+          <textarea id="spolubydlici" name="spolubydlici" rows="2" placeholder="Zadejte jména spolucestujících, se kterými chcete sdílet pokoj (pokud je znáte)"></textarea>
+        </div>
+
+        <div class="pole">
+          <label class="checkbox-volba" id="sdileni-label">
+            <input type="checkbox" id="sdileni_pokoj" name="sdileni_pokoj">
+            <span class="checkbox-volba-text">
+              <span class="checkbox-volba-nazev">Jedu sám/a</span>
+              <span class="checkbox-volba-popis">Nevadí mi sdílení pokoje s jiným účastníkem stejného pohlaví.</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────
+           Sekce 4: Cena a platba
+      ────────────────────────────────────────────────── -->
+      <div class="sekce">
+        <h2 class="sekce-nadpis">Cena a platba</h2>
+
+        <!-- Měna -->
+        <div class="pole">
+          <label>Měna platby <span class="povinne">*</span></label>
+          <div class="mena-prepinac">
+            <input type="radio" id="mena-CZK" name="mena" value="CZK" checked>
+            <label for="mena-CZK">Kč</label>
+            <input type="radio" id="mena-EUR" name="mena" value="EUR">
+            <label for="mena-EUR">€</label>
+          </div>
+        </div>
+
+        <!-- Typ ceny (dospělý / dítě) -->
+        <div class="pole" style="margin-top: 22px;">
+          <label>Základní cena <span class="povinne">*</span></label>
+          <div class="radio-skupina">
+            <label class="radio-volba vybrana" id="volba-standard">
+              <input type="radio" name="cena_typ" value="standard" checked>
+              <span class="radio-volba-text">
+                <span class="radio-volba-nazev">Standard</span>
+                <span class="radio-volba-popis">Pro dospělé účastníky</span>
+              </span>
+              <span class="radio-volba-cena" data-cena-czk="12 900 Kč" data-cena-eur="516 €">12 900 Kč</span>
+            </label>
+            <label class="radio-volba" id="volba-deti">
+              <input type="radio" name="cena_typ" value="deti">
+              <span class="radio-volba-text">
+                <span class="radio-volba-nazev">Dítě do 12 let</span>
+                <span class="radio-volba-popis">Věk do 12 let ke dni odjezdu</span>
+              </span>
+              <span class="radio-volba-cena" data-cena-czk="10 900 Kč" data-cena-eur="436 €">10 900 Kč</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Doplňky -->
+        <div class="pole" style="margin-top: 18px;">
+          <label>Doplňkové služby</label>
+          <label class="checkbox-volba" id="foceni-label">
+            <input type="checkbox" id="foceni_aury" name="foceni_aury">
+            <span class="checkbox-volba-text">
+              <span class="checkbox-volba-nazev">Focení aury a čaker</span>
+              <span class="checkbox-volba-popis">Profesionální fotografování Vaší energetické aury pomocí speciální kamery.</span>
+            </span>
+            <span class="checkbox-volba-cena" data-cena-czk="+ 500 Kč" data-cena-eur="+ 20 €">+ 500 Kč</span>
+          </label>
+        </div>
+
+        <!-- Typ platby -->
+        <div class="pole" style="margin-top: 22px;">
+          <label>Způsob úhrady <span class="povinne">*</span></label>
+          <div class="radio-skupina">
+            <label class="radio-volba" id="volba-zaloha">
+              <input type="radio" name="platba_typ" value="zaloha">
+              <span class="radio-volba-text">
+                <span class="radio-volba-nazev">Zaplatit jen zálohu</span>
+                <span class="radio-volba-popis">Doplatek do plné ceny zaplatíte před odjezdem.</span>
+              </span>
+              <span class="radio-volba-cena" data-cena-czk="5 900 Kč" data-cena-eur="236 €">5 900 Kč</span>
+            </label>
+            <label class="radio-volba" id="volba-cela">
+              <input type="radio" name="platba_typ" value="cela">
+              <span class="radio-volba-text">
+                <span class="radio-volba-nazev">Zaplatit celou částku</span>
+                <span class="radio-volba-popis">Jednorázová platba v plné výši.</span>
+              </span>
+              <span class="radio-volba-cena" id="cena-cela-zobrazeni">12 900 Kč</span>
+            </label>
+          </div>
+          <span class="zprava-chyby" id="chyba-platba_typ">Vyberte způsob úhrady.</span>
+        </div>
+
+        <!-- Shrnutí -->
+        <div class="cena-shrnuti">
+          <span class="cena-popisek">
+            K úhradě
+            <small id="cena-popisek-detail">Vyberte způsob úhrady</small>
+          </span>
+          <span class="cena-hodnota" id="cena-zobrazeni">— <sup>Kč</sup></span>
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────
+           Sekce 5: Souhlasy
+      ────────────────────────────────────────────────── -->
+      <div class="sekce">
+        <h2 class="sekce-nadpis">Souhlasy</h2>
+
+        <div class="pole">
+          <label class="checkbox-volba" id="souhlas-label">
+            <input type="checkbox" id="souhlas_podminky" name="souhlas_podminky" required>
+            <span class="checkbox-volba-text">
+              <span class="checkbox-volba-nazev">
+                Souhlasím s <a href="/podminky.html" target="_blank" rel="noopener">obchodními podmínkami</a>,
+                <a href="/podminky.html#storno" target="_blank" rel="noopener">storno podmínkami</a>
+                a se <a href="https://oaza-adamanthea.cz/gdpr" target="_blank" rel="noopener">zpracováním osobních údajů</a>. <span class="povinne">*</span>
+              </span>
+            </span>
+          </label>
+          <span class="zprava-chyby" id="chyba-souhlas_podminky">Pro odeslání přihlášky musíte souhlasit s podmínkami.</span>
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────────────────
+           Tlačítko + chyba
+      ────────────────────────────────────────────────── -->
+      <button type="submit" class="tlacitko-odeslat" id="tlacitko-odeslat">
+        <span class="text-tlacitka">Pokračovat k platbě →</span>
+        <span class="spinner-tlacitko"></span>
+      </button>
+
+      <div class="globalni-chyba" id="globalni-chyba"></div>
+
+      <p class="poznamka">
+        Po odeslání přihlášky vám zobrazíme údaje k platbě bankovním převodem (včetně QR kódu).<br>
+        Potvrzení s detaily obdržíte také e-mailem.
+      </p>
+    </form>
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       Obrazovka úspěchu (zobrazí se po odeslání)
+  ═══════════════════════════════════════════════════════ -->
+  <section class="uspech-obrazovka" id="uspech-obrazovka">
+    <div class="uspech-karta">
+      <div class="uspech-ikona">✦</div>
+      <h2 class="uspech-nadpis">Přihláška přijata</h2>
+      <p class="uspech-podtitul">Děkujeme, vaši přihlášku jsme přijali. Potvrzení s údaji k platbě jsme poslali na váš e‑mail. Pro dokončení rezervace prosím uhraďte platbu níže.</p>
+
+      <div class="qr-platba">
+        <h3>Platba bankovním převodem</h3>
+
+        <div class="platba-castka" id="uspech-castka">— Kč</div>
+        <div class="platba-poznamka" id="uspech-poznamka-platba">—</div>
+
+        <div class="qr-canvas-wrapper">
+          <img id="qr-img" alt="QR kód pro platbu" style="display:block; max-width:240px; width:100%; height:auto; margin:0 auto;">
+        </div>
+        <p style="font-size: 12.5px; color: var(--text-tlumeny); margin-bottom: 0;">
+          Naskenujte QR kód v mobilní aplikaci Vaší banky
+        </p>
+      </div>
+
+      <div class="platba-detaily">
+        <div class="platba-radek">
+          <span class="platba-radek-popis">Číslo účtu</span>
+          <span class="platba-radek-hodnota" id="uspech-ucet">—</span>
+        </div>
+        <div class="platba-radek">
+          <span class="platba-radek-popis">IBAN</span>
+          <span class="platba-radek-hodnota" id="uspech-iban">—</span>
+        </div>
+        <div class="platba-radek" id="uspech-bic-radek" style="display:none;">
+          <span class="platba-radek-popis">BIC/SWIFT</span>
+          <span class="platba-radek-hodnota" id="uspech-bic">—</span>
+        </div>
+        <div class="platba-radek">
+          <span class="platba-radek-popis">Banka</span>
+          <span class="platba-radek-hodnota" id="uspech-banka">—</span>
+        </div>
+        <div class="platba-radek">
+          <span class="platba-radek-popis">Variabilní symbol</span>
+          <span class="platba-radek-hodnota" id="uspech-vs" style="font-family: 'Cinzel', serif; color: var(--zlata-tmava);">—</span>
+        </div>
+        <div class="platba-radek">
+          <span class="platba-radek-popis">Zpráva pro příjemce</span>
+          <span class="platba-radek-hodnota" id="uspech-zprava">—</span>
+        </div>
+        <div class="platba-radek">
+          <span class="platba-radek-popis">Příjemce</span>
+          <span class="platba-radek-hodnota">Lukáš Hudeček</span>
+        </div>
+      </div>
+
+      <p class="uspech-poznamka">
+        Potvrzení přihlášky včetně všech údajů Vám bylo zasláno e-mailem.<br>
+        V případě jakýchkoli dotazů nás kontaktujte na
+        <a href="mailto:oaza.adamanthea@gmail.com" style="color: var(--zlata-tmava);">oaza.adamanthea@gmail.com</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       Zápatí
+  ═══════════════════════════════════════════════════════ -->
+  <footer>
+    <p>© 2026 Oáza Adamanthea &nbsp;·&nbsp; Přihlášky a dotazy: <a href="mailto:oaza.adamanthea@gmail.com">oaza.adamanthea@gmail.com</a></p>
+    <p style="margin-top: 8px;">
+      <a href="/podminky.html">Obchodní a storno podmínky</a> &nbsp;·&nbsp;
+      <a href="https://oaza-adamanthea.cz/gdpr">Ochrana osobních údajů</a>
+    </p>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════
+       JavaScript
+  ═══════════════════════════════════════════════════════ -->
+  <script>
+    // ── Ceník ──────────────────────────────────────────────
+    const CENIK = {
+      CZK: { standard: 12900, deti: 10900, foceni_aury: 500, zaloha: 5900, symbol: 'Kč', locale: 'cs-CZ' },
+      EUR: { standard:   516, deti:   436, foceni_aury:  20, zaloha:  236, symbol: '€',  locale: 'de-DE' },
+    };
+
+    // ── Reference ─────────────────────────────────────────
+    const form          = document.getElementById('prihlaska-form');
+    const cenaZobrazeni = document.getElementById('cena-zobrazeni');
+    const cenaPopisek   = document.getElementById('cena-popisek-detail');
+    const tlacitko      = document.getElementById('tlacitko-odeslat');
+    const globalniChyba = document.getElementById('globalni-chyba');
+    const cenaCela      = document.getElementById('cena-cela-zobrazeni');
+
+    // ── Pomocné funkce ─────────────────────────────────────
+    function getMena() {
+      return document.querySelector('input[name="mena"]:checked')?.value || 'CZK';
+    }
+    function getCenaTyp() {
+      return document.querySelector('input[name="cena_typ"]:checked')?.value || 'standard';
+    }
+    function getPlatbaTyp() {
+      return document.querySelector('input[name="platba_typ"]:checked')?.value || null;
+    }
+    function fmtCena(castka, mena) {
+      const c = CENIK[mena];
+      const formatovana = castka.toLocaleString(c.locale);
+      return `${formatovana} ${c.symbol}`;
+    }
+
+    // ── Aktualizace zobrazených cen podle měny ────────────
+    function aktualizujCenyVUI() {
+      const mena = getMena();
+      // Přepsat ceny u všech radio voleb a checkboxů
+      document.querySelectorAll('[data-cena-czk]').forEach(el => {
+        el.textContent = mena === 'EUR'
+          ? el.getAttribute('data-cena-eur')
+          : el.getAttribute('data-cena-czk');
+      });
+
+      // Spočítat cenu "celá" (typ ceny + případný doplněk)
+      const ceny    = CENIK[mena];
+      const zaklad  = ceny[getCenaTyp()];
+      const doplnek = document.getElementById('foceni_aury').checked ? ceny.foceni_aury : 0;
+      const cela    = zaklad + doplnek;
+      cenaCela.textContent = fmtCena(cela, mena);
+    }
+
+    // ── Aktualizace shrnutí (Co se zobrazí jako "K úhradě") ──
+    function aktualizujShrnuti() {
+      const mena       = getMena();
+      const ceny       = CENIK[mena];
+      const platbaTyp  = getPlatbaTyp();
+      const zaklad     = ceny[getCenaTyp()];
+      const doplnek    = document.getElementById('foceni_aury').checked ? ceny.foceni_aury : 0;
+      const celaCastka = zaklad + doplnek;
+
+      let castka, popis;
+      if (platbaTyp === 'zaloha') {
+        castka = ceny.zaloha;
+        popis  = `Záloha · doplatek ${fmtCena(celaCastka - castka, mena)} před odjezdem`;
+      } else if (platbaTyp === 'cela') {
+        castka = celaCastka;
+        popis  = 'Celá částka jednorázově';
+      } else {
+        cenaZobrazeni.innerHTML = `— <sup>${ceny.symbol}</sup>`;
+        cenaPopisek.textContent = 'Vyberte způsob úhrady';
+        return;
+      }
+
+      cenaZobrazeni.innerHTML = `${castka.toLocaleString(ceny.locale)} <sup>${ceny.symbol}</sup>`;
+      cenaPopisek.textContent = popis;
+    }
+
+    // ── Vizuální zvýraznění vybraných voleb ───────────────
+    function aktualizujVolby() {
+      // Radio cena_typ
+      document.querySelectorAll('input[name="cena_typ"]').forEach(r => {
+        r.closest('.radio-volba').classList.toggle('vybrana', r.checked);
+      });
+      // Radio platba_typ
+      document.querySelectorAll('input[name="platba_typ"]').forEach(r => {
+        r.closest('.radio-volba').classList.toggle('vybrana', r.checked);
+      });
+      // Checkboxy
+      document.getElementById('foceni-label').classList.toggle('vybrana',
+        document.getElementById('foceni_aury').checked);
+      document.getElementById('sdileni-label').classList.toggle('vybrana',
+        document.getElementById('sdileni_pokoj').checked);
+      document.getElementById('souhlas-label').classList.toggle('vybrana',
+        document.getElementById('souhlas_podminky').checked);
+    }
+
+    // ── Univerzální handler změn ──────────────────────────
+    function naZmenuFormulare() {
+      aktualizujVolby();
+      aktualizujCenyVUI();
+      aktualizujShrnuti();
+    }
+
+    // Měna
+    document.querySelectorAll('input[name="mena"]').forEach(r => {
+      r.addEventListener('change', naZmenuFormulare);
+    });
+    // Cena_typ
+    document.querySelectorAll('input[name="cena_typ"]').forEach(r => {
+      r.addEventListener('change', naZmenuFormulare);
+    });
+    // Platba_typ
+    document.querySelectorAll('input[name="platba_typ"]').forEach(r => {
+      r.addEventListener('change', naZmenuFormulare);
+    });
+    // Checkboxy
+    document.getElementById('foceni_aury').addEventListener('change', naZmenuFormulare);
+    document.getElementById('sdileni_pokoj').addEventListener('change', aktualizujVolby);
+    document.getElementById('souhlas_podminky').addEventListener('change', () => {
+      aktualizujVolby();
+      // Jakmile zaškrtne, zmizí chyba
+      document.getElementById('chyba-souhlas_podminky').classList.remove('viditelna');
+    });
+
+    // Kliknutí na odkazy uvnitř souhlasu nemá přepínat checkbox
+    document.querySelectorAll('#souhlas-label a').forEach(a => {
+      a.addEventListener('click', e => e.stopPropagation());
+    });
+
+    // ── Validace ──────────────────────────────────────────
+    function validujPole(id, podminka, zprava) {
+      const pole    = document.getElementById(id);
+      const chybaEl = document.getElementById(`chyba-${id}`);
+      if (!pole) return true;
+
+      const platne = podminka(pole);
+      pole.classList.toggle('chyba-pole', !platne);
+
+      if (chybaEl) {
+        chybaEl.classList.toggle('viditelna', !platne);
+        if (!platne && zprava) chybaEl.textContent = zprava;
+      }
+      return platne;
+    }
+
+    function validujFormular() {
+      let platny = true;
+
+      const povinnaTextova = [
+        { id: 'jmeno',          z: 'Zadejte jméno a příjmení.' },
+        { id: 'datum_narozeni', z: 'Zadejte datum narození.' },
+        { id: 'narodnost',      z: 'Zadejte národnost.' },
+        { id: 'cislo_dokladu',  z: 'Zadejte číslo dokladu totožnosti.' },
+        { id: 'adresa',         z: 'Zadejte kontaktní adresu.' },
+        { id: 'telefon',        z: 'Zadejte telefonní číslo.' },
+      ];
+      povinnaTextova.forEach(({ id, z }) => {
+        if (!validujPole(id, el => el.value.trim() !== '', z)) platny = false;
+      });
+
+      if (!validujPole('email',
+        el => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()),
+        'Zadejte platnou e-mailovou adresu.'
+      )) platny = false;
+
+      ['nastupni_misto', 'ubytovani', 'strava'].forEach(id => {
+        if (!validujPole(id, el => el.value !== '', 'Vyberte prosím jednu z možností.')) {
+          platny = false;
+        }
+      });
+
+      // Typ platby
+      if (!getPlatbaTyp()) {
+        document.getElementById('chyba-platba_typ').classList.add('viditelna');
+        platny = false;
+      } else {
+        document.getElementById('chyba-platba_typ').classList.remove('viditelna');
+      }
+
+      // Souhlas
+      if (!document.getElementById('souhlas_podminky').checked) {
+        document.getElementById('chyba-souhlas_podminky').classList.add('viditelna');
+        platny = false;
+      }
+
+      return platny;
+    }
+
+    // ── Průběžné skrývání chyb při psaní ──────────────────
+    form.querySelectorAll('input, textarea, select').forEach(el => {
+      el.addEventListener('input', () => {
+        el.classList.remove('chyba-pole');
+        const chybaEl = document.getElementById(`chyba-${el.id}`);
+        if (chybaEl) chybaEl.classList.remove('viditelna');
+        globalniChyba.classList.remove('viditelna');
+      });
+    });
+
+    // ── Odeslání formuláře ────────────────────────────────
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      globalniChyba.classList.remove('viditelna');
+
+      if (!validujFormular()) {
+        const prvniChyba = form.querySelector('.chyba-pole, .zprava-chyby.viditelna');
+        if (prvniChyba) {
+          prvniChyba.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+      }
+
+      tlacitko.disabled = true;
+      tlacitko.classList.add('nacitani');
+
+      try {
+        const data = {
+          jmeno:            document.getElementById('jmeno').value.trim(),
+          datum_narozeni:   document.getElementById('datum_narozeni').value,
+          narodnost:        document.getElementById('narodnost').value.trim(),
+          cislo_dokladu:    document.getElementById('cislo_dokladu').value.trim(),
+          adresa:           document.getElementById('adresa').value.trim(),
+          email:            document.getElementById('email').value.trim(),
+          telefon:          document.getElementById('telefon').value.trim(),
+          jak_se_dozvedeli: document.getElementById('jak_se_dozvedeli').value.trim(),
+          nastupni_misto:   document.getElementById('nastupni_misto').value,
+          strava:           document.getElementById('strava').value,
+          ubytovani:        document.getElementById('ubytovani').value,
+          spolubydlici:     document.getElementById('spolubydlici').value.trim(),
+          sdileni_pokoj:    document.getElementById('sdileni_pokoj').checked,
+          mena:             getMena(),
+          cena_typ:         getCenaTyp(),
+          foceni_aury:      document.getElementById('foceni_aury').checked,
+          platba_typ:       getPlatbaTyp(),
+          souhlas_podminky: document.getElementById('souhlas_podminky').checked,
+        };
+
+        const odpoved = await fetch('/api/prihlasit', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(data),
+        });
+
+        const vysledek = await odpoved.json();
+        if (!odpoved.ok || vysledek.chyba) {
+          throw new Error(vysledek.chyba || 'Nastala neočekávaná chyba.');
+        }
+
+        // ── Zobrazit obrazovku úspěchu s QR kódem ──
+        zobrazUspech(vysledek);
+
+      } catch (chyba) {
+        globalniChyba.textContent = chyba.message ||
+          'Nastala chyba při odesílání. Zkuste to prosím znovu nebo nás kontaktujte na oaza.adamanthea@gmail.com.';
+        globalniChyba.classList.add('viditelna');
+        globalniChyba.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        tlacitko.disabled = false;
+        tlacitko.classList.remove('nacitani');
+      }
+    });
+
+    // ── Zobrazení obrazovky úspěchu + vykreslení QR ───────
+    function zobrazUspech(v) {
+      // Skryj formulář
+      document.getElementById('hlavni-obsah').style.display = 'none';
+      document.querySelector('.uvod').style.display = 'none';
+
+      // Naplň údaje
+      const symbol = v.mena === 'EUR' ? '€' : 'Kč';
+      const locale = v.mena === 'EUR' ? 'de-DE' : 'cs-CZ';
+      document.getElementById('uspech-castka').textContent =
+        `${v.castka.toLocaleString(locale)} ${symbol}`;
+
+      const platbaPoznamka = v.platba_typ === 'zaloha'
+        ? `Záloha (doplatek ${(v.celkemZaPobyt - v.castka).toLocaleString(locale)} ${symbol} před odjezdem)`
+        : 'Plná částka';
+      document.getElementById('uspech-poznamka-platba').textContent = platbaPoznamka;
+
+      document.getElementById('uspech-ucet').textContent  = v.ucet.ucet;
+      document.getElementById('uspech-iban').textContent  = v.ucet.iban;
+      document.getElementById('uspech-banka').textContent = v.ucet.banka;
+      document.getElementById('uspech-vs').textContent    = v.vs;
+      document.getElementById('uspech-zprava').textContent = v.zprava;
+
+      if (v.ucet.bic) {
+        document.getElementById('uspech-bic').textContent = v.ucet.bic;
+        document.getElementById('uspech-bic-radek').style.display = 'flex';
+      }
+
+      // Zobraz obrazovku úspěchu (vždy — nezávisle na QR knihovně)
+      document.getElementById('uspech-obrazovka').classList.add('viditelna');
+      document.getElementById('uspech-obrazovka').scrollIntoView({ behavior: 'smooth' });
+
+      // QR kód jako obrázek z platebního řetězce SPAYD (bez závislosti na knihovně)
+      document.getElementById('qr-img').src =
+        'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&data=' + encodeURIComponent(v.spayd);
+    }
+
+    // ── Inicializace při načtení ──────────────────────────
+    naZmenuFormulare();
+  </script>
+
+</body>
+</html>
