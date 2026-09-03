@@ -1,0 +1,13 @@
+{
+  "name": "prihlaska-pyramidy",
+  "version": "2.0.0",
+  "description": "Přihláška na zájezd Bosenské pyramidy 2026 — Oáza Adamanthea",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  }
+}
